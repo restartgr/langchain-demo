@@ -12,6 +12,7 @@ export const config: Config = {
   // 默认模型配置
   models: {
     chat: "GLM-4.5-Air", // 智谱AI GLM-4.5-Air模型
+    embedding: "embedding-3", // 智谱AI embedding-3模型
   },
 
   // 应用配置

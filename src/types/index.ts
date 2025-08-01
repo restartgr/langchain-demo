@@ -5,6 +5,7 @@ export interface Config {
   };
   models: {
     chat: string;
+    embedding: string;
   };
   app: {
     maxTokens: number;

@@ -26,9 +26,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "langchain": "^0.3.0",
-    "@langchain/core": "^0.3.0",
-    "@langchain/community": "^0.3.0",
+    "langchain": "^0.3.30",
+    "@langchain/core": "^0.3.66",
+    "@langchain/community": "^0.3.49",
     "dotenv": "^16.3.1",
     "pdf-parse": "^1.1.1",
     "cheerio": "^1.0.0-rc.12",
