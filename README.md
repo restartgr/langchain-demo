@@ -17,7 +17,7 @@
 ## 📋 依赖要求
 
 - Node.js >= 18
-- npm 或 yarn
+- pnpm
 - 智谱AI API密钥（免费申请）
 
 ## 🛠️ 安装和设置
@@ -30,7 +30,7 @@ cd langchain-demo
 
 2. 安装依赖:
 ```bash
-npm install
+pnpm install
 ```
 
 3. 配置环境变量:
@@ -52,28 +52,28 @@ echo "ZHIPUAI_API_KEY=your_zhipuai_api_key_here" > .env
 
 ### 运行所有演示
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 ### 单独运行各个演示
 ```bash
 # 基础聊天演示
-npm run chat
+pnpm run chat
 
 # 文档问答演示
-npm run qa
+pnpm run qa
 
 # 工具使用演示
-npm run tools
+pnpm run tools
 
 # 链式调用演示
-npm run chain
+pnpm run chain
 ```
 
 ### 构建项目
 ```bash
-npm run build
-npm start
+pnpm run build
+pnpm start
 ```
 
 ## 📁 项目结构
@@ -154,7 +154,7 @@ ZHIPUAI_API_KEY=your_zhipuai_api_key_here
 ## 🎉 开始体验
 
 1. 按照上述步骤完成安装和配置
-2. 运行 `npm run chat` 开始与GLM-4对话
+2. 运行 `pnpm run chat` 开始与GLM-4对话
 3. 尝试其他演示功能，体验AI的强大能力
 
 ## 🤝 贡献
