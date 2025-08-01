@@ -4,15 +4,14 @@ import type { Config } from "../types/index.js";
 dotenv.config();
 
 export const config: Config = {
-  openai: {
-    apiKey: process.env.OPENAI_API_KEY,
-    apiBase: process.env.OPENAI_API_BASE,
+  zhipuai: {
+    apiKey: process.env.ZHIPUAI_API_KEY,
+    apiBase: process.env.ZHIPUAI_API_BASE || "",
   },
 
   // 默认模型配置
   models: {
-    chat: "gpt-3.5-turbo",
-    embedding: "text-embedding-ada-002",
+    chat: "GLM-4.5-Air", // 智谱AI GLM-4.5-Air模型
   },
 
   // 应用配置
@@ -23,7 +22,8 @@ export const config: Config = {
 };
 
 // 验证必需的环境变量
-if (!config.openai.apiKey) {
-  console.error("❌ 错误: 请在.env文件中设置OPENAI_API_KEY");
+if (!config.zhipuai.apiKey) {
+  console.error("❌ 错误: 请在.env文件中设置ZHIPUAI_API_KEY");
+  console.log("💡 提示: 请到 https://open.bigmodel.cn/ 申请API密钥");
   process.exit(1);
 }

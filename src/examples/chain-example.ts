@@ -1,20 +1,19 @@
-import { ChatOpenAI } from "@langchain/openai";
+import { ChatZhipuAI } from "@langchain/community/chat_models/zhipuai";
 import { PromptTemplate } from "@langchain/core/prompts";
 import { LLMChain } from "langchain/chains";
 import { SequentialChain } from "langchain/chains";
-import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 import { config } from "../config/index.js";
 
 export async function chainExample(): Promise<void> {
   console.log("⛓️ 链式调用演示开始...");
+  console.log("🔮 使用智谱AI GLM-4模型");
 
   try {
-    // 初始化聊天模型
-    const llm = new ChatOpenAI({
-      openAIApiKey: config.openai.apiKey!,
-      modelName: config.models.chat,
+    // 初始化智谱AI聊天模型
+    const llm = new ChatZhipuAI({
+      zhipuAIApiKey: config.zhipuai.apiKey!,
+      model: config.models.chat,
       temperature: config.app.temperature,
-      maxTokens: config.app.maxTokens,
     });
 
     console.log("\n1. 简单LLM链演示");
@@ -171,7 +170,7 @@ export async function chainExample(): Promise<void> {
       });
 
       const response = await responseChain.call({ input: userInput });
-      console.log(`💬 AI回应: ${response.text.trim()}`);
+      console.log(`💬 GLM回应: ${response.text.trim()}`);
     };
 
     // 测试不同类型的输入

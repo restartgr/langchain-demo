@@ -1,13 +1,27 @@
-import { ChatOpenAI } from "@langchain/openai";
-import { OpenAIEmbeddings } from "@langchain/openai";
+import { ChatZhipuAI } from "@langchain/community/chat_models/zhipuai";
 import { MemoryVectorStore } from "langchain/vectorstores/memory";
 import { Document } from "@langchain/core/documents";
 import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 import { config } from "../config/index.js";
 import type { APIResponse } from "../types/index.js";
 
+// 注意：智谱AI暂时没有官方的嵌入模型集成，这里我们使用本地嵌入或mock
+class MockEmbeddings {
+  async embedDocuments(texts: string[]): Promise<number[][]> {
+    // 简单的mock嵌入，实际应用中应使用真实的嵌入服务
+    return texts.map((text) =>
+      Array.from({ length: 768 }, () => Math.random() - 0.5)
+    );
+  }
+
+  async embedQuery(text: string): Promise<number[]> {
+    return Array.from({ length: 768 }, () => Math.random() - 0.5);
+  }
+}
+
 export async function documentQA(): Promise<void> {
   console.log("📚 文档问答演示开始...");
+  console.log("🔮 使用智谱AI GLM-4.5-Air模型");
 
   try {
     // 示例文档内容
@@ -19,7 +33,7 @@ export async function documentQA(): Promise<void> {
       }),
       new Document({
         pageContent:
-          "LangChain支持多种语言模型，包括OpenAI GPT、Anthropic Claude、Google PaLM等。",
+          "LangChain支持多种语言模型，包括OpenAI GPT、Anthropic Claude、智谱AI GLM等。",
         metadata: { source: "doc2.txt", type: "models" },
       }),
       new Document({
@@ -36,11 +50,8 @@ export async function documentQA(): Promise<void> {
 
     console.log(`📄 准备了 ${documents.length} 个文档`);
 
-    // 初始化嵌入模型
-    const embeddings = new OpenAIEmbeddings({
-      openAIApiKey: config.openai.apiKey!,
-      modelName: config.models.embedding,
-    });
+    // 初始化嵌入模型（使用mock，实际应用中应使用真实的嵌入服务）
+    const embeddings = new MockEmbeddings();
 
     // 创建向量存储
     console.log("🔄 正在创建向量存储...");
@@ -49,12 +60,11 @@ export async function documentQA(): Promise<void> {
       embeddings
     );
 
-    // 初始化聊天模型
-    const chat = new ChatOpenAI({
-      openAIApiKey: config.openai.apiKey!,
-      modelName: config.models.chat,
+    // 初始化智谱AI聊天模型
+    const chat = new ChatZhipuAI({
+      zhipuAIApiKey: config.zhipuai.apiKey!,
+      model: config.models.chat,
       temperature: config.app.temperature,
-      maxTokens: config.app.maxTokens,
     });
 
     // 问答功能

@@ -1,11 +1,10 @@
 export interface Config {
-  openai: {
+  zhipuai: {
     apiKey: string | undefined;
     apiBase?: string;
   };
   models: {
     chat: string;
-    embedding: string;
   };
   app: {
     maxTokens: number;
